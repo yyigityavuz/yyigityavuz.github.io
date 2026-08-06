@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <style>
+        /* Renk Paleti ve Tema Ayarları */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+        }
+
+        /* Sayfa Yüklenme Animasyonu */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header { 
+            background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+            padding: 5rem 0 3rem 0; 
+            text-align: center; 
+            border-bottom: 1px solid #30363d;
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        h1 { 
+            font-size: 3rem; 
+            color: #ffffff; 
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px var(--accent-glow); /* Neon parlama */
+        }
+        
+        .subtitle { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
+
+        .container { 
+            width: 85%; 
+            max-width: 900px; 
+            margin: auto; 
+            padding: 40px 20px; 
+        }
+
+        /* Bölümlerin Sırayla Ekrana Gelmesi */
+        section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.2s; }
+        section:nth-child(2) { animation-delay: 0.4s; }
+        section:nth-child(3) { animation-delay: 0.6s; }
+
+        h2 { 
+            color: #ffffff; 
+            border-bottom: 2px solid #30363d; 
+            padding-bottom: 10px; 
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 2px;
+            background: var(--accent);
+            margin-top: 10px;
+        }
+
+        .project-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Proje Kartları ve Hover Efektleri */
+        .project { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 12px; 
+            border: 1px solid #30363d;
+            transition: all 0.3s ease; 
+        }
+
+        .project:hover { 
+            transform: translateY(-5px); /* Kartın yukarı kalkması */
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow); 
+        }
+
+        .project h3 { color: #ffffff; margin-bottom: 10px; }
+        
+        .tags { margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted); }
+        .tag { background: #21262d; padding: 4px 10px; border-radius: 20px; margin-right: 5px; border: 1px solid #30363d;}
+
+        a { color: var(--accent); text-decoration: none; font-weight: bold; transition: color 0.2s, text-shadow 0.2s; }
+        a:hover { color: #79c0ff; text-shadow: 0 0 8px var(--accent-glow); }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Yiğit Yavuz</h1>
+        <p class="subtitle">Game Developer | BSc in Psychology | C#</p>
+    </header>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a game developer with a passion for game creation and a background in psychology. I combine my academic knowledge of player psychology and motivation loops with my technical problem-solving skills to design immersive gaming experiences.</p>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                
+                <div class="project">
+                    <h3>Looper Game</h3>
+                    <div class="tags">
+                        <span class="tag">Windows/Mobile</span>
+                        <span class="tag">Solo Developer</span>
+                    </div>
+                    <p></p>
+                    <p style="margin-top: 15px;"><a href="#">Watch Gameplay Video &rarr;</a></p>
+                </div>
+
+                      <div class="project">
+                    <h3>One For All</h3>
+                    <div class="tags">
+                        <span class="tag">Windows/Mobile</span>
+                        <span class="tag">Team Project - Game Developer/Designer & Pixel Art</span>
+                    </div>
+                    <p>A 48-hour game jam project that won 1st place, developed by a 3-person team. My primary contributions included the narrative, character art, UI/menu design, and partial gameplay programming. </p>
+                    <p style="margin-top: 15px;"><a href="#">Watch Gameplay Video &rarr;</a></p>
+                </div>
+
+
+                <div class="project">
+                    <h3>Simple Pointer Tracker</h3>
+                    <div class="tags">
+                        <span class="tag">Desktop Tool</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">WPF</span>
+                    </div>
+                    <p>A small, fun project born out of boredom and a slight obsession with the default Windows pointer trail. I thought it could be much cooler, so I created this simple mouse tracking utility.
+                    </p>
+                    <p style="margin-top: 15px;"><a href="#">GitHub Source Code &rarr;</a></p>
+                </div>
+              
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact & Resume</h2>
+            <p>I am ready for new projects in the game industry. Feel free to reach out to discuss my projects or for potential job opportunities.</p>
+            <p style="margin-top: 15px;">
+                Email: <a href="y.yigityavuz4@gmail.com">y.yigityavuz4@gmail.com</a><br><br>
+                <a href="#">[English Certificate]</a> | <a href="#">[Download CV PDF]</a>
+            </p>
+        </section>
+    </div>
+</body>
+</html>
