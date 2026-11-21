@@ -3,216 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Developer Portfolio</title>
+    <title>Yiğit Yavuz — Game Developer</title>
+    <meta name="description" content="Yiğit Yavuz — Game developer working with Unity, Godot and C#. Mobile and PC games, game jam winner, desktop tools.">
+    <meta property="og:title" content="Yiğit Yavuz — Game Developer">
+    <meta property="og:description" content="Unity · Godot · C# — mobile and PC games, game jam winner.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yyigityavuz.github.io/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     <style>
-        /* Renk Paleti ve Tema Ayarları */
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
+            --bg: #0d1117;
+            --bg-soft: #11161d;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --muted: #8b949e;
+            --heading: #ffffff;
             --accent: #58a6ff;
-            --accent-glow: rgba(88, 166, 255, 0.4);
+            --accent-strong: #1f6feb;
+            --accent-glow: rgba(88, 166, 255, 0.35);
+            --gold: #e3b341;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background: var(--bg);
+            color: var(--text);
         }
 
-        /* Sayfa Yüklenme Animasyonu */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        header { 
-            background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
-            padding: 5rem 0 3rem 0; 
-            text-align: center; 
-            border-bottom: 1px solid #30363d;
-            animation: fadeUp 0.8s ease-out;
-        }
-
-        h1 { 
-            font-size: 3rem; 
-            color: #ffffff; 
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px var(--accent-glow); /* Neon parlama */
-        }
-        
-        .subtitle { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
-
-        .container { 
-            width: 85%; 
-            max-width: 900px; 
-            margin: auto; 
-            padding: 40px 20px; 
-        }
-
-        /* Bölümlerin Sırayla Ekrana Gelmesi */
-        section {
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeUp 0.8s ease-out forwards;
-        }
-
-        section:nth-child(1) { animation-delay: 0.2s; }
-        section:nth-child(2) { animation-delay: 0.4s; }
-        section:nth-child(3) { animation-delay: 0.6s; }
-
-        h2 { 
-            color: #ffffff; 
-            border-bottom: 2px solid #30363d; 
-            padding-bottom: 10px; 
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        
-        h2::after {
-            content: '';
-            display: block;
-            width: 40%;
-            height: 2px;
-            background: var(--accent);
-            margin-top: 10px;
-        }
-
-        .project-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Proje Kartları ve Hover Efektleri */
-        .project { 
-            background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 12px; 
-            border: 1px solid #30363d;
-            transition: all 0.3s ease; 
-        }
-
-        .project:hover { 
-            transform: translateY(-5px); /* Kartın yukarı kalkması */
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow); 
-        }
-
-        .project h3 { color: #ffffff; margin-bottom: 10px; }
-        
-        .tags { margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted); }
-        .tag { background: #21262d; padding: 4px 10px; border-radius: 20px; margin-right: 5px; border: 1px solid #30363d;}
-
-        a { color: var(--accent); text-decoration: none; font-weight: bold; transition: color 0.2s, text-shadow 0.2s; }
+        a { color: var(--accent); text-decoration: none; font-weight: 600; transition: color .2s, text-shadow .2s; }
         a:hover { color: #79c0ff; text-shadow: 0 0 8px var(--accent-glow); }
 
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------- Navigation ---------- */
+        nav {
+            position: sticky; top: 0; z-index: 10;
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1000px; margin: auto; padding: 14px 20px;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+        }
+        .logo { color: var(--heading); font-weight: 700; letter-spacing: .5px; }
+        .nav-links { display: flex; gap: 22px; list-style: none; }
+        .nav-links a { color: var(--muted); font-weight: 500; }
+        .nav-links a:hover { color: var(--heading); text-shadow: none; }
+
+        /* ---------- Hero ---------- */
+        header {
+            background: radial-gradient(ellipse at top, #1b2533 0%, var(--bg) 70%);
+            padding: 5.5rem 20px 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            animation: fadeUp .8s ease-out;
+        }
+        .eyebrow { color: var(--accent); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: .85rem; }
+        h1 {
+            font-size: clamp(2.4rem, 6vw, 3.4rem);
+            color: var(--heading);
+            margin: 8px 0 12px;
+            text-shadow: 0 0 18px var(--accent-glow);
+        }
+        .tagline { max-width: 620px; margin: 0 auto; color: var(--text); font-size: 1.1rem; }
+        .status {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 22px; padding: 6px 14px;
+            border: 1px solid #238636; border-radius: 999px;
+            color: #7ee787; font-size: .9rem; background: rgba(35, 134, 54, .12);
+        }
+        .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 8px #3fb950; }
+
+        .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 11px 22px; border-radius: 8px;
+            border: 1px solid var(--border); background: var(--card); color: var(--heading);
+            transition: transform .2s, border-color .2s, box-shadow .2s;
+        }
+        .btn:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--heading); box-shadow: 0 0 14px var(--accent-glow); text-shadow: none; }
+        .btn-primary { background: var(--accent-strong); border-color: var(--accent-strong); }
+        .btn-primary:hover { background: #388bfd; border-color: #388bfd; }
+        .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* ---------- Layout ---------- */
+        .container { max-width: 1000px; margin: auto; padding: 56px 20px; }
+
+        section { margin-bottom: 4rem; opacity: 0; animation: fadeUp .8s ease-out forwards; }
+        section:nth-of-type(1) { animation-delay: .15s; }
+        section:nth-of-type(2) { animation-delay: .3s; }
+        section:nth-of-type(3) { animation-delay: .45s; }
+        section:nth-of-type(4) { animation-delay: .6s; }
+
+        h2 { color: var(--heading); margin-bottom: 24px; display: inline-block; font-size: 1.7rem; }
+        h2::after { content: ''; display: block; width: 45%; height: 3px; background: var(--accent); margin-top: 8px; border-radius: 2px; }
+
+        /* ---------- About ---------- */
+        .about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: start; }
+        .about-grid p + p { margin-top: 12px; }
+        .facts { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; list-style: none; }
+        .facts li { padding: 8px 0; border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; gap: 12px; }
+        .facts li:last-child { border-bottom: none; }
+        .facts span:first-child { color: var(--muted); }
+        .facts span:last-child { color: var(--heading); text-align: right; }
+
+        /* ---------- Skills ---------- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+        .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .skill-card h3 { color: var(--heading); font-size: 1rem; margin-bottom: 12px; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { background: #21262d; padding: 3px 11px; border-radius: 20px; border: 1px solid var(--border); font-size: .85rem; color: var(--muted); }
+        .tag.award { color: var(--gold); border-color: rgba(227, 179, 65, .5); background: rgba(227, 179, 65, .08); }
+
+        /* ---------- Projects ---------- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
+        .project {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+            overflow: hidden; display: flex; flex-direction: column;
+            transition: transform .3s, border-color .3s, box-shadow .3s;
+        }
+        .project:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 15px var(--accent-glow); }
+        .project.featured { grid-column: 1 / -1; }
+
+        .thumb { position: relative; display: block; aspect-ratio: 16 / 9; background: #0b0f14; overflow: hidden; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+        .project:hover .thumb img { transform: scale(1.04); }
+        .thumb::after {
+            content: '▶'; position: absolute; inset: 0; margin: auto;
+            width: 58px; height: 58px; border-radius: 50%;
+            display: grid; place-items: center; padding-left: 4px;
+            background: rgba(13, 17, 23, .75); color: #fff; font-size: 1.3rem;
+            border: 2px solid rgba(255,255,255,.8);
+        }
+        .thumb.code { display: grid; place-items: center; background: linear-gradient(135deg, #1b2533, #0d1117); }
+        .thumb.code::after { content: none; }
+        .thumb.code span { font-family: Consolas, 'Courier New', monospace; font-size: 2.4rem; color: var(--accent); text-shadow: 0 0 18px var(--accent-glow); }
+
+        .project-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+        .project h3 { color: var(--heading); font-size: 1.25rem; margin-bottom: 10px; }
+        .project .tags { margin-bottom: 14px; }
+        .project ul { padding-left: 18px; margin-top: 10px; }
+        .project li { margin-bottom: 4px; }
+        .links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: auto; padding-top: 16px; }
+
+        .featured .project-inner { display: grid; grid-template-columns: 1.1fr 1fr; }
+        .featured .thumb { aspect-ratio: auto; min-height: 100%; }
+
+        /* ---------- Contact ---------- */
+        .contact-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 32px; text-align: center;
+        }
+        .contact-card p { max-width: 560px; margin: 0 auto; }
+        .contact-card .cta { margin-top: 22px; }
+
+        footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 28px 20px 40px; border-top: 1px solid var(--border); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 760px) {
+            .about-grid, .featured .project-inner { grid-template-columns: 1fr; }
+            .featured .thumb { aspect-ratio: 16 / 9; }
+            .nav-links { gap: 14px; }
+            .nav-links .hide-sm { display: none; }
+            header { padding: 4rem 16px 3rem; }
+            .container { padding: 40px 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            section { opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <header>
+    <nav>
+        <div class="nav-inner">
+            <a class="logo" href="#top">Yiğit Yavuz</a>
+            <ul class="nav-links">
+                <li class="hide-sm"><a href="#about">About</a></li>
+                <li class="hide-sm"><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="cv/Yigit_Yavuz_CV.pdf" download>CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="top">
+        <p class="eyebrow">Game Developer</p>
         <h1>Yiğit Yavuz</h1>
-        <p class="subtitle">Game Developer | BSc in Psychology | C# | Associate Degree in Computer Programming</p>
+        <p class="tagline">I build mobile and PC games with <strong>Unity</strong> and <strong>Godot</strong> in <strong>C#</strong> — from gameplay mechanics and physics to pixel art, UI and monetization.</p>
+        <div class="status">Open to junior / entry-level game developer roles</div>
+        <div class="cta">
+            <a class="btn btn-primary" href="cv/Yigit_Yavuz_CV.pdf" download>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16 6.5 10.5l1.4-1.4 3.1 3.1V3h2v9.2l3.1-3.1 1.4 1.4L12 16Zm-7 4v-2h14v2H5Z"/></svg>
+                Download CV
+            </a>
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn" href="https://github.com/yyigityavuz" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+            </a>
+            <a class="btn" href="https://yyigityavuz.itch.io" target="_blank" rel="noopener">itch.io</a>
+        </div>
     </header>
 
-    <div class="container">
+    <main class="container">
         <section id="about">
             <h2>About Me</h2>
-            <p>I am a game developer currently pursuing an Associate Degree in Computer Programming, with a strict focus on software development. I primarily utilize C# to build custom desktop utilities and architect game mechanics. Additionally, I hold a BSc in Psychology.</p>
-        </section>
-        <section id="projects">
-            <h2>My Projects</h2>
-            <div class="project-grid">
-                
-                <div class="project">
-                    <h3>Looper Game</h3>
-                    <div class="tags">
-                        <span class="tag">Windows/Mobile</span>
-                        <span class="tag">Solo Developer</span>
-                        <span class="tag">Godot</span>
-                        <span class="tag">2D</span>
-                    </div>
-                    <p>
-    My first solo-developed game created with Godot Engine. It's a platformer where the core mechanic revolves around returning to the starting point without going off-screen to complete a "loop." I personally drew the main character in pixel art and utilized free assets for the tilemaps. The game is fully playable on both PC and mobile platforms.
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://youtu.be/ORrqAi-eEag">Watch Gameplay Video &rarr;</a></p>
-                    <p style="margin-top: 15px;"><a href="https://yyigityavuz.itch.io/looper-game">Play on itch.io&rarr;</a></p>
+            <div class="about-grid">
+                <div>
+                    <p>I'm a game developer studying for an Associate Degree in Computer Programming. I design and build complete games end to end: core mechanics, level design, physics tuning, shaders, UI and publishing on PC and mobile.</p>
+                    <p>I also hold a BSc in Psychology, which shapes how I think about games — player motivation, feedback loops, difficulty curves and readable UI. I enjoy turning a small idea into a polished, playable experience, and I'm looking for a team where I can grow as a gameplay programmer.</p>
                 </div>
-
-           <div class="project">
-    <h3>One For All</h3>
-    <div class="tags">
-        <span class="tag">Windows/Mobile</span>
-        <span class="tag">Team Project - 1st Place</span>
-    </div>
-    <p>
-        1st place 48-hour game jam project; engineered core mechanics and level design, created pixel art and UI, and collaborated in a 3-person team to ensure seamless integration.
-    </p>
-    <p style="margin-top: 15px;"><a href="https://www.youtube.com/watch?v=WvFv9chxF2w&t=154s">Watch Gameplay Video &rarr;</a></p>
-               <p style="margin-top: 15px;"><a href="https://batuhan-guc.itch.io/oneforall">You can play the game on itch.io&rarr;</a></p>
-</div>
-
-
-                <div class="project">
-                    <h3>Simple Pointer Tracker</h3>
-                    <div class="tags">
-                        <span class="tag">Desktop Tool</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">WPF</span>
-                    </div>
-                    <p>A small, fun project born out of boredom and a slight obsession with the default Windows pointer trail. I thought it could be much cooler, so I created this simple mouse tracking utility.
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://github.com/yyigityavuz/MouseTrail.git">GitHub Source Code &rarr;</a></p>
-                </div>
-              
-
+                <ul class="facts">
+                    <li><span>Focus</span><span>Gameplay programming</span></li>
+                    <li><span>Engines</span><span>Unity, Godot</span></li>
+                    <li><span>Language</span><span>C#</span></li>
+                    <li><span>Platforms</span><span>Mobile, Windows</span></li>
+                    <li><span>Highlight</span><span>🏆 Game jam 1st place</span></li>
+                </ul>
             </div>
+        </section>
 
-                      <div class="project">
-                    <h3>Jumping Rush</h3>
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Engines &amp; Languages</h3>
                     <div class="tags">
-                        <span class="tag">Mobile Game</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">Mobile Game Development</span>
-                        <span class="tag">Unity</span>
-                        <span class="tag">3D</span>
-                    
+                        <span class="tag">C#</span><span class="tag">Unity</span><span class="tag">Godot</span><span class="tag">.NET / WPF</span>
                     </div>
-                    <p>A complete game showcase highlighting custom gameplay mechanics, Unity physics optimization, Shader Graph implementations, and Google Ads integration.
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://youtu.be/EEeKj0heo7c">Gameplay Video &rarr;</a></p>
                 </div>
+                <div class="skill-card">
+                    <h3>Gameplay</h3>
+                    <div class="tags">
+                        <span class="tag">Game mechanics</span><span class="tag">Physics</span><span class="tag">Level design</span><span class="tag">2D &amp; 3D</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Visuals &amp; UI</h3>
+                    <div class="tags">
+                        <span class="tag">Shader Graph</span><span class="tag">Pixel art</span><span class="tag">Game UI</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Mobile &amp; Tools</h3>
+                    <div class="tags">
+                        <span class="tag">Android builds</span><span class="tag">Google Ads integration</span><span class="tag">Git &amp; GitHub</span><span class="tag">itch.io publishing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                   <div class="project">
-                    <h3>CanUFly</h3>
-                    <div class="tags">
-                        <span class="tag">Mobile Game</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">Mobile Game Development</span>
-                        <span class="tag">Unity</span>
-                        <span class="tag">3D</span>
-                    
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-grid">
+
+                <article class="project featured">
+                    <div class="project-inner">
+                        <a class="thumb" href="https://www.youtube.com/watch?v=WvFv9chxF2w&amp;t=154s" target="_blank" rel="noopener" aria-label="Watch One For All gameplay video">
+                            <img src="https://img.youtube.com/vi/WvFv9chxF2w/hqdefault.jpg" alt="One For All gameplay" loading="lazy">
+                        </a>
+                        <div class="project-body">
+                            <h3>One For All</h3>
+                            <div class="tags">
+                                <span class="tag award">🏆 1st Place — 48h Game Jam</span>
+                                <span class="tag">Team of 3</span>
+                                <span class="tag">Windows / Mobile</span>
+                                <span class="tag">2D</span>
+                            </div>
+                            <p>Won first place in a 48-hour game jam with a three-person team.</p>
+                            <ul>
+                                <li>Engineered the core mechanics and designed the levels</li>
+                                <li>Created the pixel art and the in-game UI</li>
+                                <li>Integrated teammates' work into one stable build under the deadline</li>
+                            </ul>
+                            <div class="links">
+                                <a href="https://www.youtube.com/watch?v=WvFv9chxF2w&amp;t=154s" target="_blank" rel="noopener">Gameplay Video &rarr;</a>
+                                <a href="https://batuhan-guc.itch.io/oneforall" target="_blank" rel="noopener">Play on itch.io &rarr;</a>
+                            </div>
+                        </div>
                     </div>
-                    <p>A complete game showcase highlighting custom gameplay mechanics, Unity physics optimization, Shader Graph implementations
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://www.youtube.com/watch?v=A8wga1eN2f4&t=">Gameplay Video &rarr;</a></p>
-                </div>
-              
+                </article>
+
+                <article class="project">
+                    <a class="thumb" href="https://youtu.be/EEeKj0heo7c" target="_blank" rel="noopener" aria-label="Watch Jumping Rush gameplay video">
+                        <img src="https://img.youtube.com/vi/EEeKj0heo7c/hqdefault.jpg" alt="Jumping Rush gameplay" loading="lazy">
+                    </a>
+                    <div class="project-body">
+                        <h3>Jumping Rush</h3>
+                        <div class="tags">
+                            <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Mobile</span><span class="tag">3D</span>
+                        </div>
+                        <p>A complete 3D mobile game built in Unity.</p>
+                        <ul>
+                            <li>Custom gameplay mechanics written in C#</li>
+                            <li>Physics tuned and optimized for mobile devices</li>
+                            <li>Visual effects built with Shader Graph</li>
+                            <li>Google Ads integration for monetization</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://youtu.be/EEeKj0heo7c" target="_blank" rel="noopener">Gameplay Video &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <a class="thumb" href="https://www.youtube.com/watch?v=A8wga1eN2f4" target="_blank" rel="noopener" aria-label="Watch CanUFly gameplay video">
+                        <img src="https://img.youtube.com/vi/A8wga1eN2f4/hqdefault.jpg" alt="CanUFly gameplay" loading="lazy">
+                    </a>
+                    <div class="project-body">
+                        <h3>CanUFly</h3>
+                        <div class="tags">
+                            <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Mobile</span><span class="tag">3D</span>
+                        </div>
+                        <p>A 3D mobile game built in Unity.</p>
+                        <ul>
+                            <li>Custom gameplay mechanics written in C#</li>
+                            <li>Physics-driven movement tuned for mobile</li>
+                            <li>Shader Graph effects for the game's visual style</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://www.youtube.com/watch?v=A8wga1eN2f4" target="_blank" rel="noopener">Gameplay Video &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <a class="thumb" href="https://youtu.be/ORrqAi-eEag" target="_blank" rel="noopener" aria-label="Watch Looper gameplay video">
+                        <img src="https://img.youtube.com/vi/ORrqAi-eEag/hqdefault.jpg" alt="Looper gameplay" loading="lazy">
+                    </a>
+                    <div class="project-body">
+                        <h3>Looper</h3>
+                        <div class="tags">
+                            <span class="tag">Godot</span><span class="tag">Solo Developer</span><span class="tag">Windows / Mobile</span><span class="tag">2D</span>
+                        </div>
+                        <p>My first solo game: a 2D platformer where you complete a "loop" by returning to the starting point without leaving the screen.</p>
+                        <ul>
+                            <li>Designed and programmed every system myself</li>
+                            <li>Drew the main character in pixel art</li>
+                            <li>Published on itch.io, playable on PC and mobile</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://youtu.be/ORrqAi-eEag" target="_blank" rel="noopener">Gameplay Video &rarr;</a>
+                            <a href="https://yyigityavuz.itch.io/looper-game" target="_blank" rel="noopener">Play on itch.io &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project featured">
+                    <div class="project-inner">
+                    <a class="thumb code" href="https://github.com/yyigityavuz/MouseTrail" target="_blank" rel="noopener" aria-label="Simple Pointer Tracker source code on GitHub">
+                        <span>&lt;/&gt;</span>
+                    </a>
+                    <div class="project-body">
+                        <h3>Simple Pointer Tracker</h3>
+                        <div class="tags">
+                            <span class="tag">C#</span><span class="tag">WPF</span><span class="tag">Desktop Tool</span>
+                        </div>
+                        <p>A small Windows utility that draws a custom trail behind the mouse pointer — built because I thought the default Windows pointer trail could look much cooler.</p>
+                        <div class="links">
+                            <a href="https://github.com/yyigityavuz/MouseTrail" target="_blank" rel="noopener">Source Code on GitHub &rarr;</a>
+                        </div>
+                    </div>
+                    </div>
+                </article>
 
             </div>
         </section>
 
         <section id="contact">
             <h2>Contact</h2>
-            <p>Feel free to reach out</p>
-            <p style="margin-top: 15px;">
-                Email: <a href="mailto:y.yigityavuz4@gmail.com">y.yigityavuz4@gmail.com</a>
-            </p>
+            <div class="contact-card">
+                <p>I'm currently looking for junior game developer opportunities. If you'd like to work together or just talk about games, feel free to reach out.</p>
+                <div class="cta">
+                    <a class="btn btn-primary" href="mailto:y.yigityavuz4@gmail.com">y.yigityavuz4@gmail.com</a>
+                    <a class="btn" href="cv/Yigit_Yavuz_CV.pdf" download>Download CV</a>
+                    <a class="btn" href="https://github.com/yyigityavuz" target="_blank" rel="noopener">GitHub</a>
+                    <a class="btn" href="https://yyigityavuz.itch.io" target="_blank" rel="noopener">itch.io</a>
+                </div>
+            </div>
         </section>
-    </div>
+    </main>
+
+    <footer>© 2026 Yiğit Yavuz</footer>
 </body>
 </html>
