@@ -3,76 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Developer Portfolio</title>
+    <title>Yiğit Yavuz | Game Design & Product Portfolio</title>
+    <meta name="description" content="Yiğit Yavuz – game designer and developer with a BSc in Psychology. Level design, game mechanics and player behavior. Unity, Godot, C#.">
     <style>
-        /* Renk Paleti ve Tema Ayarları */
         :root {
             --bg-color: #0d1117;
             --card-bg: #161b22;
+            --border: #30363d;
             --text-main: #c9d1d9;
             --text-muted: #8b949e;
             --accent: #58a6ff;
             --accent-glow: rgba(88, 166, 255, 0.4);
+            --gold: #e3b341;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
         }
 
-        /* Sayfa Yüklenme Animasyonu */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        header { 
+        nav {
+            position: sticky; top: 0; z-index: 10;
+            background: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            padding: 12px 0;
+        }
+        nav a { margin: 0 14px; font-size: 0.95rem; }
+
+        header {
             background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
-            padding: 5rem 0 3rem 0; 
-            text-align: center; 
-            border-bottom: 1px solid #30363d;
+            padding: 4.5rem 1rem 3rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
             animation: fadeUp 0.8s ease-out;
         }
 
-        h1 { 
-            font-size: 3rem; 
-            color: #ffffff; 
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
             margin-bottom: 10px;
-            text-shadow: 0 0 15px var(--accent-glow); /* Neon parlama */
+            text-shadow: 0 0 15px var(--accent-glow);
         }
-        
+
         .subtitle { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
+        .header-links { margin-top: 22px; }
+        .btn {
+            display: inline-block;
+            margin: 6px;
+            padding: 8px 18px;
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+        .btn:hover { background: rgba(88, 166, 255, 0.1); }
 
-        .container { 
-            width: 85%; 
-            max-width: 900px; 
-            margin: auto; 
-            padding: 40px 20px; 
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
         }
 
-        /* Bölümlerin Sırayla Ekrana Gelmesi */
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
             opacity: 0;
             animation: fadeUp 0.8s ease-out forwards;
         }
-
         section:nth-child(1) { animation-delay: 0.2s; }
         section:nth-child(2) { animation-delay: 0.4s; }
         section:nth-child(3) { animation-delay: 0.6s; }
+        section:nth-child(4) { animation-delay: 0.8s; }
 
-        h2 { 
-            color: #ffffff; 
-            border-bottom: 2px solid #30363d; 
-            padding-bottom: 10px; 
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
             margin-bottom: 20px;
             display: inline-block;
         }
-        
         h2::after {
             content: '';
             display: block;
@@ -82,137 +101,299 @@
             margin-top: 10px;
         }
 
-        .project-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        #about p { margin-bottom: 12px; }
 
-        /* Proje Kartları ve Hover Efektleri */
-        .project { 
-            background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 12px; 
-            border: 1px solid #30363d;
-            transition: all 0.3s ease; 
-        }
+        .project-grid { display: flex; flex-direction: column; gap: 24px; }
 
-        .project:hover { 
-            transform: translateY(-5px); /* Kartın yukarı kalkması */
+        .project {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            transition: all 0.3s ease;
+        }
+        .project:hover {
+            transform: translateY(-5px);
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow);
+        }
+        .project.no-media { grid-template-columns: 1fr; }
+
+        .thumb {
+            display: block;
+            position: relative;
+            background: #000;
+            min-height: 180px;
+        }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .thumb .play {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.6rem; color: #fff;
+            text-shadow: 0 0 12px rgba(0,0,0,0.9);
+            opacity: 0.85;
         }
 
-        .project h3 { color: #ffffff; margin-bottom: 10px; }
-        
-        .tags { margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted); }
-        .tag { background: #21262d; padding: 4px 10px; border-radius: 20px; margin-right: 5px; border: 1px solid #30363d;}
+        .project-body { padding: 22px 25px; }
+        .project h3 { color: #ffffff; margin-bottom: 8px; }
+        .badge {
+            display: inline-block;
+            background: rgba(227, 179, 65, 0.15);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .tags { margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted); }
+        .tag {
+            display: inline-block;
+            background: #21262d;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin: 0 5px 5px 0;
+            border: 1px solid var(--border);
+        }
+
+        .project ul { margin: 8px 0 0 18px; }
+        .project li { margin-bottom: 4px; }
+        .label { color: #ffffff; font-weight: bold; }
+        .links { margin-top: 14px; }
+        .links a { margin-right: 18px; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .skill-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+        .skill-box h4 { color: #ffffff; margin-bottom: 8px; }
 
         a { color: var(--accent); text-decoration: none; font-weight: bold; transition: color 0.2s, text-shadow 0.2s; }
         a:hover { color: #79c0ff; text-shadow: 0 0 8px var(--accent-glow); }
 
+        footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 30px 0; border-top: 1px solid var(--border); }
+
+        @media (max-width: 700px) {
+            h1 { font-size: 2.2rem; }
+            .project { grid-template-columns: 1fr; }
+            .thumb { min-height: 200px; }
+        }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
     <header>
         <h1>Yiğit Yavuz</h1>
-        <p class="subtitle">Game Developer | BSc in Psychology | C# | Associate Degree in Computer Programming</p>
+        <p class="subtitle">Game Designer &amp; Developer | BSc in Psychology | Unity · Godot · C#</p>
+        <div class="header-links">
+            <a class="btn" href="mailto:y.yigityavuz4@gmail.com">Email</a>
+            <a class="btn" href="https://yyigityavuz.itch.io/">itch.io</a>
+            <a class="btn" href="https://github.com/yyigityavuz">GitHub</a>
+            <!-- TODO: add LinkedIn and CV links
+            <a class="btn" href="https://www.linkedin.com/in/YOUR-PROFILE">LinkedIn</a>
+            <a class="btn" href="cv.pdf">Download CV</a>
+            -->
+        </div>
     </header>
 
     <div class="container">
         <section id="about">
             <h2>About Me</h2>
-            <p>I am a game developer currently pursuing an Associate Degree in Computer Programming, with a strict focus on software development. I primarily utilize C# to build custom desktop utilities and architect game mechanics. Additionally, I hold a BSc in Psychology.</p>
+            <p>I design and build games, with a focus on core mechanics, level design and what keeps players engaged. I have shipped solo projects in Godot and Unity, and won 1st place in a 48-hour game jam with a 3-person team.</p>
+            <p>I hold a <strong>BSc in Psychology</strong>, which shapes how I approach games: I think about motivation, difficulty, learning curves and player behavior when designing levels and systems. I am currently completing an Associate Degree in Computer Programming, so I can also prototype my own ideas in C#.</p>
+            <p>I am especially interested in mobile and puzzle games, and in using player data to make design decisions.</p>
         </section>
+
         <section id="projects">
-            <h2>My Projects</h2>
+            <h2>Projects</h2>
             <div class="project-grid">
-                
+
+                <!-- TODO: RoboLoop – fill in and uncomment
                 <div class="project">
-                    <h3>Looper Game</h3>
-                    <div class="tags">
-                        <span class="tag">Windows/Mobile</span>
-                        <span class="tag">Solo Developer</span>
-                        <span class="tag">Godot</span>
-                        <span class="tag">2D</span>
+                    <a class="thumb" href="GAMEPLAY-VIDEO-OR-ITCH-LINK"><img src="images/roboloop.png" alt="RoboLoop screenshot" loading="lazy"></a>
+                    <div class="project-body">
+                        <h3>RoboLoop</h3>
+                        <div class="tags">
+                            <span class="tag">ENGINE</span>
+                            <span class="tag">GENRE</span>
+                            <span class="tag">Solo / Team</span>
+                        </div>
+                        <p>One-sentence pitch.</p>
+                        <ul>
+                            <li><span class="label">Core loop:</span> ...</li>
+                            <li><span class="label">My role:</span> ...</li>
+                        </ul>
+                        <div class="links"><a href="#">Play &rarr;</a><a href="#">Gameplay Video &rarr;</a></div>
                     </div>
-                    <p>
-    My first solo-developed game created with Godot Engine. It's a platformer where the core mechanic revolves around returning to the starting point without going off-screen to complete a "loop." I personally drew the main character in pixel art and utilized free assets for the tilemaps. The game is fully playable on both PC and mobile platforms.
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://youtu.be/ORrqAi-eEag">Watch Gameplay Video &rarr;</a></p>
-                    <p style="margin-top: 15px;"><a href="https://yyigityavuz.itch.io/looper-game">Play on itch.io&rarr;</a></p>
                 </div>
-
-           <div class="project">
-    <h3>One For All</h3>
-    <div class="tags">
-        <span class="tag">Windows/Mobile</span>
-        <span class="tag">Team Project - 1st Place</span>
-    </div>
-    <p>
-        1st place 48-hour game jam project; engineered core mechanics and level design, created pixel art and UI, and collaborated in a 3-person team to ensure seamless integration.
-    </p>
-    <p style="margin-top: 15px;"><a href="https://www.youtube.com/watch?v=WvFv9chxF2w&t=154s">Watch Gameplay Video &rarr;</a></p>
-               <p style="margin-top: 15px;"><a href="https://batuhan-guc.itch.io/oneforall">You can play the game on itch.io&rarr;</a></p>
-</div>
-
+                -->
 
                 <div class="project">
-                    <h3>Simple Pointer Tracker</h3>
-                    <div class="tags">
-                        <span class="tag">Desktop Tool</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">WPF</span>
+                    <a class="thumb" href="https://www.youtube.com/watch?v=WvFv9chxF2w&t=154s">
+                        <img src="https://img.youtube.com/vi/WvFv9chxF2w/hqdefault.jpg" alt="One For All gameplay" loading="lazy">
+                        <span class="play">&#9654;</span>
+                    </a>
+                    <div class="project-body">
+                        <h3>One For All <span class="badge">&#127942; 1st Place – Game Jam</span></h3>
+                        <div class="tags">
+                            <span class="tag">48-hour Game Jam</span>
+                            <span class="tag">3-person Team</span>
+                            <span class="tag">Windows / Mobile</span>
+                            <span class="tag">Pixel Art</span>
+                        </div>
+                        <p>Won 1st place in a 48-hour game jam with a 3-person team.</p>
+                        <ul>
+                            <li><span class="label">My role:</span> designed the core mechanics and the levels, created the pixel art and UI.</li>
+                            <li><span class="label">Teamwork:</span> worked closely with my teammates to integrate design, art and code under a tight deadline.</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://batuhan-guc.itch.io/oneforall">Play on itch.io &rarr;</a>
+                            <a href="https://www.youtube.com/watch?v=WvFv9chxF2w&t=154s">Gameplay Video &rarr;</a>
+                        </div>
                     </div>
-                    <p>A small, fun project born out of boredom and a slight obsession with the default Windows pointer trail. I thought it could be much cooler, so I created this simple mouse tracking utility.
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://github.com/yyigityavuz/MouseTrail.git">GitHub Source Code &rarr;</a></p>
                 </div>
-              
+
+                <div class="project">
+                    <a class="thumb" href="https://youtu.be/ORrqAi-eEag">
+                        <img src="https://img.youtube.com/vi/ORrqAi-eEag/hqdefault.jpg" alt="Looper Game gameplay" loading="lazy">
+                        <span class="play">&#9654;</span>
+                    </a>
+                    <div class="project-body">
+                        <h3>Looper Game</h3>
+                        <div class="tags">
+                            <span class="tag">Godot</span>
+                            <span class="tag">2D Platformer</span>
+                            <span class="tag">Solo</span>
+                            <span class="tag">Windows / Mobile</span>
+                        </div>
+                        <p>My first solo game, a platformer built around a single rule: complete a "loop" by getting back to the starting point without leaving the screen.</p>
+                        <ul>
+                            <li><span class="label">Design:</span> built the core mechanic and the level layouts around the loop rule.</li>
+                            <li><span class="label">Art:</span> drew the main character in pixel art; used free assets for the tilemaps.</li>
+                            <li><span class="label">Platforms:</span> playable on PC and mobile.</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://yyigityavuz.itch.io/looper-game">Play on itch.io &rarr;</a>
+                            <a href="https://youtu.be/ORrqAi-eEag">Gameplay Video &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <a class="thumb" href="https://youtu.be/EEeKj0heo7c">
+                        <img src="https://img.youtube.com/vi/EEeKj0heo7c/hqdefault.jpg" alt="Jumping Rush gameplay" loading="lazy">
+                        <span class="play">&#9654;</span>
+                    </a>
+                    <div class="project-body">
+                        <h3>Jumping Rush</h3>
+                        <div class="tags">
+                            <span class="tag">Unity 3D</span>
+                            <span class="tag">Mobile</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Ad Integration</span>
+                        </div>
+                        <p>A 3D mobile game with custom gameplay mechanics and in-game ads.</p>
+                        <ul>
+                            <li><span class="label">Gameplay:</span> designed and implemented custom mechanics; tuned Unity physics for smooth play on mobile.</li>
+                            <li><span class="label">Monetization:</span> integrated Google Ads.</li>
+                            <li><span class="label">Visuals:</span> Shader Graph effects.</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://youtu.be/EEeKj0heo7c">Gameplay Video &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <a class="thumb" href="https://www.youtube.com/watch?v=A8wga1eN2f4">
+                        <img src="https://img.youtube.com/vi/A8wga1eN2f4/hqdefault.jpg" alt="CanUFly gameplay" loading="lazy">
+                        <span class="play">&#9654;</span>
+                    </a>
+                    <div class="project-body">
+                        <h3>CanUFly</h3>
+                        <div class="tags">
+                            <span class="tag">Unity 3D</span>
+                            <span class="tag">Mobile</span>
+                            <span class="tag">C#</span>
+                        </div>
+                        <p>A 3D mobile game built around custom flight and physics-based mechanics.</p>
+                        <ul>
+                            <li><span class="label">Gameplay:</span> designed and implemented custom mechanics; optimized Unity physics for mobile.</li>
+                            <li><span class="label">Visuals:</span> Shader Graph effects.</li>
+                        </ul>
+                        <div class="links">
+                            <a href="https://www.youtube.com/watch?v=A8wga1eN2f4">Gameplay Video &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project no-media">
+                    <div class="project-body">
+                        <h3>Simple Pointer Tracker</h3>
+                        <div class="tags">
+                            <span class="tag">Desktop Tool</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">WPF</span>
+                        </div>
+                        <p>A small side project: a mouse-tracking utility that makes the default Windows pointer trail look better.</p>
+                        <div class="links">
+                            <a href="https://github.com/yyigityavuz/MouseTrail.git">GitHub Source Code &rarr;</a>
+                        </div>
+                    </div>
+                </div>
 
             </div>
+        </section>
 
-                      <div class="project">
-                    <h3>Jumping Rush</h3>
-                    <div class="tags">
-                        <span class="tag">Mobile Game</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">Mobile Game Development</span>
-                        <span class="tag">Unity</span>
-                        <span class="tag">3D</span>
-                    
-                    </div>
-                    <p>A complete game showcase highlighting custom gameplay mechanics, Unity physics optimization, Shader Graph implementations, and Google Ads integration.
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://youtu.be/EEeKj0heo7c">Gameplay Video &rarr;</a></p>
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h4>Game Design</h4>
+                    <p>Core mechanics, level design, game jam prototyping, player psychology and motivation</p>
                 </div>
-
-                   <div class="project">
-                    <h3>CanUFly</h3>
-                    <div class="tags">
-                        <span class="tag">Mobile Game</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">Mobile Game Development</span>
-                        <span class="tag">Unity</span>
-                        <span class="tag">3D</span>
-                    
-                    </div>
-                    <p>A complete game showcase highlighting custom gameplay mechanics, Unity physics optimization, Shader Graph implementations
-                    </p>
-                    <p style="margin-top: 15px;"><a href="https://www.youtube.com/watch?v=A8wga1eN2f4&t=">Gameplay Video &rarr;</a></p>
+                <div class="skill-box">
+                    <h4>Engines &amp; Code</h4>
+                    <p>Unity (incl. Shader Graph), Godot, C#, WPF, mobile ad integration (Google Ads)</p>
                 </div>
-              
-
+                <div class="skill-box">
+                    <h4>Art &amp; UI</h4>
+                    <p>Pixel art, UI design</p>
+                </div>
+                <div class="skill-box">
+                    <h4>Education</h4>
+                    <p>BSc in Psychology<br>Associate Degree in Computer Programming (in progress)</p>
+                </div>
             </div>
         </section>
 
         <section id="contact">
             <h2>Contact</h2>
-            <p>Feel free to reach out</p>
+            <p>I am open to game design, level design and product roles. Feel free to reach out.</p>
             <p style="margin-top: 15px;">
                 Email: <a href="mailto:y.yigityavuz4@gmail.com">y.yigityavuz4@gmail.com</a>
             </p>
         </section>
     </div>
+
+    <footer>&copy; Yiğit Yavuz</footer>
 </body>
 </html>
