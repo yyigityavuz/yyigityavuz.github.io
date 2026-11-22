@@ -111,7 +111,8 @@
             border: 1px solid var(--border);
             overflow: hidden;
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 240px 1fr;
+            align-items: start;
             transition: all 0.3s ease;
         }
         .project:hover {
@@ -125,7 +126,10 @@
             display: block;
             position: relative;
             background: #000;
-            min-height: 180px;
+            aspect-ratio: 16 / 9;
+            margin: 22px 0 22px 22px;
+            border-radius: 8px;
+            overflow: hidden;
         }
         .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .thumb .play {
@@ -188,7 +192,7 @@
         @media (max-width: 700px) {
             h1 { font-size: 2.2rem; }
             .project { grid-template-columns: 1fr; }
-            .thumb { min-height: 200px; }
+            .thumb { margin: 16px 16px 0 16px; max-width: 420px; }
         }
     </style>
 </head>
